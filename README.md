@@ -4,6 +4,7 @@
 
 A bilingual, illustrated web storybook adapting the beloved Chinese folktale **《神笔马良》 (Shén Bǐ Mǎ Liáng)** for primary-school children — narrated in Mandarin and English with classical Chinese ink-wash (水墨画) illustration.
 
+[![Live Demo](https://img.shields.io/badge/Live-Demo-161616?style=flat-square&logo=githubpages)](https://pimplesonnose.github.io/magic-paintbrush/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-inherit?style=flat-square)](LICENSE)
 [![Audience](https://img.shields.io/badge/Audience-Primary%20School-cinnabar?style=flat-square)](https://github.com)
 
