@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>神笔马良 — The Magic Paintbrush</title>
+  <meta name="description" content="A bilingual retelling of the beloved Chinese folktale 'The Magic Paintbrush' (神笔马良) with classical ink-wash illustrations, narration, and pinyin.">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🖌️</text></svg>">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=ZCOOL+XiaoWei&family=Noto+Serif+SC:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ════════════════════════════════════════════
+       ATMOSPHERE — Ink Mist + Splash Layer
+       ════════════════════════════════════════════ -->
+  <div class="mist" aria-hidden="true">
+    <div class="mist-layer mist-1"></div>
+    <div class="mist-layer mist-2"></div>
+    <div class="mist-layer mist-3"></div>
+  </div>
+  <div class="ink-splash-layer" id="inkSplashLayer" aria-hidden="true"></div>
+
+  <!-- ════════════════════════════════════════════
+       HERO — Handscroll Unrolling
+       ════════════════════════════════════════════ -->
+  <section id="hero" class="hero" aria-label="Title screen">
+    <div class="hero__scroll">
+      <div class="hero__seal" aria-hidden="true">神筆</div>
+      <div class="hero__scroll-paper">
+        <h1 class="hero__title-zh">神笔马良</h1>
+        <h2 class="hero__title-en">The Magic Paintbrush</h2>
+        <p class="hero__pinyin">Shén Bǐ Mǎ Liáng</p>
+        <button id="begin-btn" class="hero__cta" aria-label="Begin the story">
+          <span class="hero__cta-sub">Open the Scroll</span>
+          <span>开卷阅读</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════
+       HEADER BAR — Fixed top strip
+       ════════════════════════════════════════════ -->
+  <header class="header" id="header" aria-label="Controls">
+    <div class="header__inner">
+      <div class="header__brand">
+        <div class="header__seal" aria-hidden="true">印</div>
+        <span class="header__title">神笔马良</span>
+      </div>
+
+      <!-- Scroll-tray chapter nav -->
+      <nav class="scroll-tray" id="scrollTray" aria-label="Chapter navigation"></nav>
+
+      <!-- Controls -->
+      <div class="controls">
+        <div class="lang-toggle" role="group" aria-label="Language">
+          <button id="langEn" class="lang-btn" data-lang="en" aria-pressed="false">EN</button>
+          <button id="langZh" class="lang-btn active" data-lang="zh" aria-pressed="true">中文</button>
+        </div>
+        <button id="autoplayBtn" class="autoplay-btn" title="Toggle auto-play" aria-label="Toggle auto-play">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <circle cx="12" cy="12" r="10"/>
+            <polygon points="10,8 16,12 10,16" fill="currentColor"/>
+          </svg>
+          <span>AUTO</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ════════════════════════════════════════════
+       HANDSCROLL PROGRESS BAR
+       ════════════════════════════════════════════ -->
+  <div class="scroll-progress" id="scrollProgress" aria-hidden="true">
+    <div class="scroll-progress__track" id="scrollTrack"></div>
+    <div class="scroll-progress__brush" id="scrollBrush">
+      <svg viewBox="0 0 24 24" fill="none">
+        <path d="M3 21 L7 17 L10 20 L14 16 L18 18 L21 14" stroke="var(--gold)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        <circle cx="18" cy="18" r="2" fill="var(--gold)" opacity="0.4"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════
+       MAIN STORY CONTAINER
+       ════════════════════════════════════════════ -->
+  <main class="story" id="story" aria-label="Story">
+    <!-- Chapters rendered by JS -->
+  </main>
+
+  <!-- ════════════════════════════════════════════
+       INKSTONE — Fixed bottom audio console
+       ════════════════════════════════════════════ -->
+  <div class="inkstone" id="inkstone">
+    <div class="inkstone__inner">
+      <div class="inkstone__label">
+        <span class="inkstone__label-ch" id="inkstoneLabelZh">第一章</span>
+        <span id="inkstoneLabelEn">Ch 1</span>
+      </div>
+
+      <button class="inkstone__play" id="inkstonePlay" aria-label="Play / Pause">
+        <svg class="icon-play" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+        <svg class="icon-pause" viewBox="0 0 24 24" fill="currentColor" style="display:none"><path d="M6 4h4v16H6zM14 4h4v16h-4z"/></svg>
+      </button>
+
+      <div class="inkstone__stone" id="inkstoneStone">
+        <div class="inkstone__ink" id="inkstoneInk"></div>
+        <div class="inkstone__playhead" id="inkstonePlayhead">
+          <svg viewBox="0 0 24 24" fill="var(--ink)" opacity="0.35">
+            <path d="M3 21 L7 17 L10 20 L14 16 L18 18 L21 14" stroke="var(--ink)" stroke-width="1.5" stroke-linecap="round" fill="none" opacity="0.2"/>
+            <circle cx="12" cy="12" r="4" fill="var(--ink)" opacity="0.25"/>
+          </svg>
+        </div>
+      </div>
+
+      <span class="inkstone__time" id="inkstoneTime">0:00</span>
+
+      <div class="inkstone__nav">
+        <button id="prevBtn" aria-label="Previous chapter">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <button id="nextBtn" aria-label="Next chapter">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════
+       FOOTER
+       ════════════════════════════════════════════ -->
+  <footer class="footer">
+    <p>《神笔马良》 · 洪汛涛 · 1955</p>
+    <p>A bilingual webbook · <a href="https://pi.dev" target="blank" rel="noopener">Pi</a> · <a href="https://www.minimax.io/" target="_blank" rel="noopener">MiniMax</a> · MIT License</p>
+  </footer>
+
+  <!-- Audio (hidden — must be before scripts so DOM refs resolve) -->
+  <audio id="audioPlayer" preload="none" style="display:none"></audio>
+
+  <!-- ════════════════════════════════════════════
+       SCRIPTS
+       ════════════════════════════════════════════ -->
+  <script src="js/story-data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

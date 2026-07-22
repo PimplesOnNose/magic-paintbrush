@@ -1,0 +1,21 @@
+# Build artefacts
+.DS_Store
+Thumbs.db
+*.log
+
+# Node / editors
+node_modules/
+.vscode/
+.idea/
+
+# Regenerated media (uncomment if you don't want to keep generated assets in git)
+# audio/**/*.mp3
+# images/
+# images/raw/
+
+# Env / secrets
+.env
+.env.local
+
+# OS
+._*
